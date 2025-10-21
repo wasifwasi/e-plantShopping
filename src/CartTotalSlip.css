@@ -1,0 +1,77 @@
+.cart-slip-app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f9f5;
+}
+
+.cart-slip-box {
+  width: 380px;
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  text-align: center;
+}
+
+.cart-slip-header h3 {
+  font-size: 22px;
+  color: #2e7d32;
+  margin-bottom: 5px;
+}
+
+.cart-slip-header p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.cart-slip-header h4 {
+  font-size: 18px;
+  color: #444;
+  margin: 10px 0;
+}
+
+.cart-slip-items {
+  text-align: left;
+  margin: 15px 0;
+}
+
+.cart-slip-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  font-size: 15px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.item-total {
+  text-align: right;
+}
+
+.cart-slip-total {
+  margin-top: 15px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.thankyou-text {
+  margin-top: 25px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.empty-cart {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin: 20px 0;
+}

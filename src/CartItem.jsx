@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem, updateQuantity } from "./CartSlice";
 import "./CartItem.css";
+import CartTotalSlip from "./CartTotalSlip";
 
 const CartItem = ({ onContinueShopping }) => {
+  const [showSlip, setShowSlip] = useState(false);
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
-  // Calculate total amount for all products in the cart
+  // 🧾 Calculate total amount for all products
   const calculateTotalAmount = () => {
     return cart.reduce((total, item) => {
       const cost = parseFloat(item.cost?.replace("$", "")) || 0;
@@ -15,18 +17,27 @@ const CartItem = ({ onContinueShopping }) => {
     }, 0);
   };
 
+  // 🛒 Handlers
   const handleContinueShopping = (e) => {
     e.preventDefault();
     onContinueShopping();
   };
 
+  const handleCheckout = () => {
+    setShowSlip(true);
+  };
+
   const handleIncrement = (item) => {
-    dispatch(updateQuantity({ name: item.name, quantity: (item.quantity || 1) + 1 }));
+    dispatch(
+      updateQuantity({ name: item.name, quantity: (item.quantity || 1) + 1 })
+    );
   };
 
   const handleDecrement = (item) => {
     if ((item.quantity || 1) > 1) {
-      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+      dispatch(
+        updateQuantity({ name: item.name, quantity: item.quantity - 1 })
+      );
     }
   };
 
@@ -34,18 +45,24 @@ const CartItem = ({ onContinueShopping }) => {
     dispatch(removeItem(item.name));
   };
 
-  // Calculate total cost for an individual item
+  // 🧮 Calculate total cost for one item
   const calculateTotalCost = (item) => {
     const cost = parseFloat(item.cost?.replace("$", "")) || 0;
     return cost * (item.quantity || 1);
   };
 
+  // 🛍️ Empty cart view
   if (!cart || cart.length === 0) {
     return (
       <div className="cart-container">
-        <h2 style={{ color: "black", textAlign: "center" }}>Your cart is empty!</h2>
+        <h2 style={{ color: "black", textAlign: "center" }}>
+          Your cart is empty!
+        </h2>
         <div className="continue_shopping_btn">
-          <button className="get-started-button" onClick={handleContinueShopping}>
+          <button
+            className="get-started-button"
+            onClick={handleContinueShopping}
+          >
             Continue Shopping
           </button>
         </div>
@@ -53,6 +70,7 @@ const CartItem = ({ onContinueShopping }) => {
     );
   }
 
+  // 🧾 Main cart view
   return (
     <div className="cart-container">
       <h2 style={{ color: "black" }}>
@@ -101,15 +119,16 @@ const CartItem = ({ onContinueShopping }) => {
       </div>
 
       <div className="continue_shopping_btn">
-        <button
-          className="get-started-button"
-          onClick={handleContinueShopping}
-        >
+        <button className="get-started-button" onClick={handleContinueShopping}>
           Continue Shopping
         </button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={handleCheckout}>
+          Checkout
+        </button>
       </div>
+
+      {showSlip && <CartTotalSlip />}
     </div>
   );
 };
