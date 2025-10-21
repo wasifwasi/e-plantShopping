@@ -368,7 +368,7 @@ function ProductList({ onHomeClick }) {
           {plantsArray.map(
             (
               category,
-              index, // Loop through each category in plantsArray
+              index // Loop through each category in plantsArray
             ) => (
               <div key={index}>
                 {" "}
@@ -383,7 +383,7 @@ function ProductList({ onHomeClick }) {
                   {category.plants.map(
                     (
                       plant,
-                      plantIndex, // Loop through each plant in the current category
+                      plantIndex // Loop through each plant in the current category
                     ) => (
                       <div className="product-card" key={plantIndex}>
                         {" "}
@@ -413,11 +413,11 @@ function ProductList({ onHomeClick }) {
                           Add to Cart
                         </button>
                       </div>
-                    ),
+                    )
                   )}
                 </div>
               </div>
-            ),
+            )
           )}
         </div>
       ) : (
